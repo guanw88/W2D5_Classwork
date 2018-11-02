@@ -15,8 +15,11 @@ class Node
   end
 
   def remove
-    # optional but useful, connects previous link to next link
-    # and removes self from list.
+    previous_node = self.prev 
+    next_node = self.next
+    #re-assigns previous and next to bypass current node
+    previous_node.next = next_node 
+    next_node.prev = previous_node
   end
 end
 
@@ -85,13 +88,7 @@ class LinkedList
     current_node = nil
     self.each do |node|
       if node.key == key
-        #assigns nodes
-        current_node = node 
-        previous_node = current_node.prev 
-        next_node = current_node.next
-        #re-assigns previous and next to bypass current node
-        previous_node.next = next_node 
-        next_node.prev = previous_node
+        node.remove
         break
       end 
     end
