@@ -1,23 +1,30 @@
 class MaxIntSet
   def initialize(max)
+    @store = Array.new(max, false)
   end
 
   def insert(num)
+    raise "Out of bounds" unless is_valid?(num)
+    @store[num] = true
   end
 
   def remove(num)
+    @store[num] = false
   end
 
   def include?(num)
+    @store[num]
   end
 
   private
 
   def is_valid?(num)
+    return false if num < 0 || num >= @store.length
+    true
   end
 
-  def validate!(num)
-  end
+  # def validate!(num)
+  # end
 end
 
 
