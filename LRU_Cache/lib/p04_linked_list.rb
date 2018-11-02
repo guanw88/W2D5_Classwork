@@ -51,18 +51,12 @@ class LinkedList
   end
 
   def get(key)
-    self.each do |node|
-      return node.val if node.key == key
-    end
-    nil
+    matched_node = self.select {|node| node.key == key}
+    matched_node.empty? ? nil : matched_node[0].val
   end
 
   def include?(key)
-    self.each do |node|
-      return true if node.key == key
-    end 
-    
-    false
+    self.any? {|node| node.key == key}
   end
 
   def append(key, val)
@@ -77,11 +71,9 @@ class LinkedList
   end
 
   def update(key, val)
-    
     self.each do |node|
       node.val = val if node.key == key
     end
-    
   end
 
   def remove(key)
