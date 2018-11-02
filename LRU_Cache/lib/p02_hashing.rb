@@ -35,6 +35,17 @@ class Hash
   # This returns 0 because rspec will break if it returns nil
   # Make sure to implement an actual Hash#hash method
   def hash
-    0
+    hash_to_arr = self.to_a.sort
+    hash_to_arr.flatten!
+    hash_to_arr.map! do |el|
+      if el.is_a? Integer 
+        el 
+      elsif el.is_a? Symbol 
+        el.to_s.hash 
+      elsif el.is_a? String 
+        el.hash 
+      end
+    end 
+    hash_to_arr.hash
   end
 end
